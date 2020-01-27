@@ -1,0 +1,5 @@
+elasticsearch:
+    resource: "@ElasticSearchBundle/Controller/"
+    type:     annotation
+    prefix:   /saltid/elasticsearch
+

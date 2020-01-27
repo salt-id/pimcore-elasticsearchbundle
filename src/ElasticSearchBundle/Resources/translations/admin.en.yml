@@ -1,0 +1,11 @@
+elasticsearch: 'Elasticsearch'
+
+menuConfig: 'Configuration'
+menuSynonymTokenFilter: 'Synonym Token Filter'
+
+synonym: 'Synonym'
+elasticsearchIndex: 'Index'
+hostorip: 'Host or IP'
+port: 'Port'
+httpBasicAuthUser: 'HTTP Basic Auth User'
+httpBasicAuthPassword: 'HTTP Basic Auth Password'

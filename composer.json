@@ -1,0 +1,32 @@
+{
+    "name": "saltid/pimcore-elasticsearchbundle",
+    "description": "Pimcore meet ElasticSearch",
+    "type": "pimcore-bundle",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Yulius Ardian Febrianto",
+            "email": "yuliusardin@gmail.com"
+        }
+    ],
+    "require": {
+        "pimcore/pimcore": "^5.4.0 | ^6.3.0",
+        "saltid/pimcore-extensionmanagerbundle": "^v1.0.0-beta-0.1",
+        "elasticsearch/elasticsearch": "v7.4.0",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SaltId\\ElasticSearchBundle\\" : "src/ElasticSearchBundle/"
+        }
+    },
+    "extra": {
+        "pimcore": {
+            "bundles": [
+                "SaltId\\ElasticSearchBundle\\ElasticSearchBundle"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false
+}
