@@ -22,6 +22,9 @@ class ElasticSearchBundle extends AbstractPimcoreBundle
     public function getJsPaths()
     {
         return [
+            '/bundles/elasticsearch/js/pimcore/elasticsearch/indexConfigDialog.js',
+            '/bundles/elasticsearch/js/pimcore/elasticsearch/index.js',
+            '/bundles/elasticsearch/js/pimcore/elasticsearch/indexItem.js',
             '/bundles/elasticsearch/js/pimcore/elasticsearch/configuration.js',
             '/bundles/elasticsearch/js/pimcore/elasticsearch/synonym.js',
             '/bundles/elasticsearch/js/pimcore/startup.js'
@@ -47,6 +50,6 @@ class ElasticSearchBundle extends AbstractPimcoreBundle
 
     public function getInstaller()
     {
-        $this->container->get(Installer::class);
+        return $this->container->get(Installer::class);
     }
 }

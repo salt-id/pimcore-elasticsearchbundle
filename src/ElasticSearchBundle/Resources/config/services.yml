@@ -28,3 +28,12 @@ services:
         arguments:
             # fetch the bundle via expression language
             $bundle: "@=service('kernel').getBundle('ElasticSearchBundle')"
+
+    SaltId\ElasticSearchBundle\Services\ElasticSearch: ~
+
+    SaltId\ElasticSearchBundle\EventListener\DataObjectEventListener:
+        tags:
+            - { name: kernel.event_listener, event: pimcore.dataobject.preAdd, method: onDataObjectPreAdd }
+            - { name: kernel.event_listener, event: pimcore.dataobject.postAdd, method: onDataObjectPostAdd }
+            - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: onDataObjectPreUpdate }
+            - { name: kernel.event_listener, event: pimcore.dataobject.postUpdate, method: onDataObjectPostUpdate }

@@ -27,9 +27,7 @@ pimcore.plugin.ElasticSearchBundle = Class.create(pimcore.plugin.admin, {
         elasticsearchMenu.push({
             text: t('elasticsearchIndex'),
             iconCls: "pimcore_nav_icon_class",
-            handler: function () {
-                Ext.Msg.alert('Index', 'Index Me !');
-            }
+            handler: this.elasticsearchMenuIndexHandler
         })
 
         var extensionManagerMenu = new Ext.Action({
@@ -64,6 +62,26 @@ pimcore.plugin.ElasticSearchBundle = Class.create(pimcore.plugin.admin, {
         }
         catch (e) {
             pimcore.globalmanager.add("synonym", new saltid.elasticsearch.setting.synonym());
+        }
+    },
+
+    elasticsearchMenuIndexHandler: function () {
+        var tabPanel = Ext.getCmp("pimcore_panel_tabs");
+        try {
+            tabPanel.setActiveTab(pimcore.globalmanager.get("saltid_elasticsearch_index_panel").getLayout());
+        }
+        catch (e) {
+            var elasticsearchIndexPanel = new saltid.elasticsearch.setting.indexPanel();
+            pimcore.globalmanager.add("saltid_elasticsearch_index_panel", elasticsearchIndexPanel);
+
+            tabPanel.add(elasticsearchIndexPanel.getLayout());
+            tabPanel.setActiveTab(elasticsearchIndexPanel.getLayout());
+
+            elasticsearchIndexPanel.getLayout().on("destroy", function () {
+                pimcore.globalmanager.remove("saltid_elasticsearch_index_panel");
+            }.bind(this));
+
+            pimcore.layout.refresh();
         }
     },
 });
