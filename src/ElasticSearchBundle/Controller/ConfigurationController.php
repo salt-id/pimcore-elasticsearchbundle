@@ -9,6 +9,9 @@
 namespace SaltId\ElasticSearchBundle\Controller;
 
 use Pimcore\File;
+use SaltId\ElasticSearchBundle\Resolver\ElasticSearchConfigurationResolver;
+use SaltId\ElasticSearchBundle\Tool\Config;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -19,58 +22,31 @@ use Symfony\Component\Yaml\Yaml;
  */
 class ConfigurationController extends AbstractController
 {
-    private $configFile = self::SYNONYM_PATH . '/config.yml';
-
-
-    private $configs = [
-        'general' => [
-            'hostorip' => '127.0.0.1',
-            'port' => '9200',
-            'httpBasicAuthUser' => null,
-            'httpBasicAuthPassword' => null
-        ]
-    ];
-
     /**
      * @param Request $request
      *
      * @Route("/")
+     * @return JsonResponse
      */
     public function getConfiguration(Request $request)
     {
-        try {
-            $config = Yaml::parseFile($this->configFile) ?: $this->configs;
-            File::put($this->configFile, Yaml::dump($config, 5));
-
-        } catch (ParseException $parseException) {
-            if (!$fileExist = file_exists($this->configFile)) {
-                File::put($this->configFile, Yaml::dump($this->configs, 5));
-            }
-
-            $config = $this->configs;
-        }
-
-        return $this->json(['values' => $config], 200);
+        $getConfig = Config::getConfig();
+        return $this->json(['values' => $getConfig], 200);
     }
 
     /**
      * @param Request $request
      *
      * @Route("/save")
+     * @return JsonResponse
      */
-    public function putConfiguration(Request $request)
+    public function saveConfiguration(Request $request)
     {
-        $existing = Yaml::parseFile($this->configFile) ? Yaml::parseFile($this->configFile) : $this->configs;
-
         $decode = json_decode($request->get('data'), true);
         $data = $this->exploder($decode);
 
-        $settings = array_replace_recursive($existing, $data);
-        $save = File::put($this->configFile, Yaml::dump($settings, 5));
-
-        return $this->json([
-            'success' => $save
-        ], 200);
+        $setConfig = Config::setConfig($data);
+        return $this->json($setConfig, 200);
     }
 
     public function exploder(array $data)

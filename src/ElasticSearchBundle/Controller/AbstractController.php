@@ -12,13 +12,14 @@ namespace SaltId\ElasticSearchBundle\Controller;
 use Pimcore\Controller\FrontendController;
 use Pimcore\Tool\Session;
 use Pimcore\Model\User as PimcoreUser;
+use SaltId\ElasticSearchBundle\Tool\Config;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 
 abstract class AbstractController extends FrontendController
 {
-    const SYNONYM_PATH = PIMCORE_PRIVATE_VAR . '/bundles/pimcore-elasticsearchbundle';
+    const SYNONYM_PATH = Config::ELASTICSEARCH_BUNDLE_VAR_PATH;
 
     public function onKernelController(FilterControllerEvent $event)
     {

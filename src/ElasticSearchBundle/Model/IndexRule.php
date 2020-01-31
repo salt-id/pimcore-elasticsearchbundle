@@ -186,7 +186,7 @@ class IndexRule extends AbstractModel
      */
     public function getActive()
     {
-        return $this->active;
+        return (bool) $this->active;
     }
 
     /**

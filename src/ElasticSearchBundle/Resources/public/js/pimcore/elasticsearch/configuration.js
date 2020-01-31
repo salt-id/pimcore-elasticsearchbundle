@@ -13,6 +13,10 @@ saltid.elasticsearch.setting.configuration = Class.create({
 
                 this.data = Ext.decode(response.responseText);
 
+                if (this.data.success === false) {
+                    Ext.Msg.alert('Information', this.data.message);
+                }
+
                 this.getTabPanel();
 
             }.bind(this)
@@ -115,6 +119,12 @@ saltid.elasticsearch.setting.configuration = Class.create({
                                 xtype: "textfield",
                                 inputType: "password",
                                 value: this.getValue("general.httpBasicAuthPassword"),
+                            },
+                            {
+                                xtype: "textfield",
+                                fieldLabel: "Index",
+                                name: 'general.index',
+                                value: this.getValue("general.index"),
                             }
                         ]
                     },
@@ -165,7 +175,7 @@ saltid.elasticsearch.setting.configuration = Class.create({
                             }
                         }.bind(this));
                     } else {
-                        pimcore.helpers.showNotification(t("error"), t("saving_failed"),
+                        pimcore.helpers.showNotification(t("error"), res.message,
                             "error", t(res.message));
                     }
                 } catch (e) {

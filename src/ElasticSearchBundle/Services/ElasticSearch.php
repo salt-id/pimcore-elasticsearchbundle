@@ -9,6 +9,7 @@
 namespace SaltId\ElasticSearchBundle\Services;
 
 use Elasticsearch\ClientBuilder;
+use SaltId\ElasticSearchBundle\Tool\Config;
 
 class ElasticSearch
 {
@@ -18,10 +19,10 @@ class ElasticSearch
     public function __construct()
     {
         $this->client = ClientBuilder::create()
-            ->setBasicAuthentication('admin', 'admin')
+            ->setBasicAuthentication(Config::getConfigHttpBasicAuthUser(), Config::getConfigHttpBasicAuthPassword())
             ->setHosts(
                 [
-                    'host' => 'http://elastic.staging7.salt.id:80'
+                    'host' => Config::getConfigHostOrIp() . ':' . Config::getConfigPort()
                 ]
             )
             ->build();

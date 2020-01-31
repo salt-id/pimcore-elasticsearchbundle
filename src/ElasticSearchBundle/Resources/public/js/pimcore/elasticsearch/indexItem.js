@@ -15,8 +15,6 @@ saltid.elasticsearch.setting.index.item = Class.create({
         this.classId = 0;
         this.indexRuleId = this.data.id;
 
-        console.log("Watch Data : " + this.data.className);
-
         this.firstLoad = true;
 
         if (!this.firstLoad) {
@@ -191,6 +189,7 @@ saltid.elasticsearch.setting.index.item = Class.create({
                 if (!res.success) {
                     pimcore.helpers.showNotification(t("warning"), res.message, "warning");
                 }
+                this.parent.getTree().getStore().load();
             }.bind(this)
         });
     }
