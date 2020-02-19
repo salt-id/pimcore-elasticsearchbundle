@@ -126,6 +126,9 @@ class DataObjectEventListener
             }
             $existingFields[$fieldName] = $object->$getter();
         }
+        if (method_exists($object, 'getRouter')) {
+            $existingFields['url'] = $object->getRouter();
+        }
         // @todo think about it.
 
         // @todo send to elasticsearch.

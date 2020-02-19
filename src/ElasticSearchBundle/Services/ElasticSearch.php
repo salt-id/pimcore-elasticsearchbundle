@@ -18,9 +18,11 @@ class ElasticSearch
 
     public function __construct()
     {
-        $this->client = ClientBuilder::create()
-            ->setBasicAuthentication(Config::getConfigHttpBasicAuthUser(), Config::getConfigHttpBasicAuthPassword())
-            ->setHosts(
+        $this->client = ClientBuilder::create();
+        if (Config::getConfigHttpBasicAuthUser() && Config::getConfigHttpBasicAuthPassword()) {
+            $this->client->setBasicAuthentication(Config::getConfigHttpBasicAuthUser(), Config::getConfigHttpBasicAuthPassword());
+        }
+        $this->client->setHosts(
                 [
                     'host' => Config::getConfigHostOrIp() . ':' . Config::getConfigPort()
                 ]
