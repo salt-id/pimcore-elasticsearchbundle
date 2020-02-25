@@ -18,16 +18,16 @@ class ElasticSearch
 
     public function __construct()
     {
-        $this->client = ClientBuilder::create();
+        $client = ClientBuilder::create();
         if (Config::getConfigHttpBasicAuthUser() && Config::getConfigHttpBasicAuthPassword()) {
-            $this->client->setBasicAuthentication(Config::getConfigHttpBasicAuthUser(), Config::getConfigHttpBasicAuthPassword());
+            $client->setBasicAuthentication(Config::getConfigHttpBasicAuthUser(), Config::getConfigHttpBasicAuthPassword());
         }
-        $this->client->setHosts(
+        $client->setHosts(
                 [
                     'host' => Config::getConfigHostOrIp() . ':' . Config::getConfigPort()
                 ]
-            )
-            ->build();
+            );
+        $this->client = $client->build();
     }
 
     public function createIndex(string $index, array $bodyData)
