@@ -15,7 +15,6 @@ use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\ClassDefinition;
 use SaltId\ElasticSearchBundle\Services\ElasticSearch;
 use SaltId\ElasticSearchBundle\Model\IndexRule;
-use SaltId\ElasticSearchBundle\Tool\Config;
 
 class DataObjectEventListener
 {
@@ -132,8 +131,12 @@ class DataObjectEventListener
         // @todo think about it.
 
         // @todo send to elasticsearch.
-        $putIndex = $this->elasticSearch
-            ->createDocument(Config::getConfigIndex(), strtolower($className), $object->getId(), $existingFields);
+        try {
+            $putIndex = $this->elasticSearch
+                ->createDocument('nutri', strtolower($className), $object->getId(), $existingFields);
+        } catch (\Exception $exception) {
+            $putIndex = ['status' => false, 'message' => $exception->getMessage()];
+        }
 
         $fileLogName = 'BUNDLE_ELASTICSEARCH_';
         $fileLogName .= strtoupper($className) . '_';

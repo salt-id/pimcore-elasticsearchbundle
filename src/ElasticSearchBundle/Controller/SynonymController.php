@@ -26,10 +26,14 @@ class SynonymController extends AbstractController
     {
         $data['default'] = '';
 
-        $onFileSystem = file_exists(self::SYNONYM_PATH . '/' . self::SYNONYM_FILE);
+        try {
+            $onFileSystem = file_exists(self::SYNONYM_PATH . '/' . self::SYNONYM_FILE);
 
-        if ($onFileSystem) {
-            $data['default'] = file_get_contents(self::SYNONYM_PATH . '/' . self::SYNONYM_FILE);
+            if ($onFileSystem) {
+                $data['default'] = file_get_contents(self::SYNONYM_PATH . '/' . self::SYNONYM_FILE);
+            }
+        } catch (\Exception $exception) {
+
         }
 
         return $this->json([

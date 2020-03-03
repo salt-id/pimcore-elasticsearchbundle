@@ -9,7 +9,7 @@
 namespace SaltId\ElasticSearchBundle\Services;
 
 use Elasticsearch\ClientBuilder;
-use SaltId\ElasticSearchBundle\Tool\Config;
+use SaltId\ElasticSearchBundle\Model\Config;
 
 class ElasticSearch
 {
@@ -18,13 +18,14 @@ class ElasticSearch
 
     public function __construct()
     {
+        $config = Config::getById(1);
         $client = ClientBuilder::create();
-        if (Config::getConfigHttpBasicAuthUser() && Config::getConfigHttpBasicAuthPassword()) {
-            $client->setBasicAuthentication(Config::getConfigHttpBasicAuthUser(), Config::getConfigHttpBasicAuthPassword());
+        if ($config->getHttpBasicAuthUser() && $config->getHttpBasicAuthPassword()) {
+            $client->setBasicAuthentication($config->getHttpBasicAuthUser(), $config->getHttpBasicAuthPassword());
         }
         $client->setHosts(
                 [
-                    'host' => Config::getConfigHostOrIp() . ':' . Config::getConfigPort()
+                    'host' => $config->getHostorip() . ':' . $config->getPort()
                 ]
             );
         $this->client = $client->build();

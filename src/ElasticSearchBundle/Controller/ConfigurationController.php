@@ -9,8 +9,8 @@
 namespace SaltId\ElasticSearchBundle\Controller;
 
 use Pimcore\File;
+use SaltId\ElasticSearchBundle\Model\Config;
 use SaltId\ElasticSearchBundle\Resolver\ElasticSearchConfigurationResolver;
-use SaltId\ElasticSearchBundle\Tool\Config;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,8 +30,13 @@ class ConfigurationController extends AbstractController
      */
     public function getConfiguration(Request $request)
     {
-        $getConfig = Config::getConfig();
-        return $this->json(['values' => $getConfig], 200);
+        $getConfig = Config::getById(1);
+
+        if (!$getConfig) {
+            $getConfig = $this->getDefaultConfiguration();
+        }
+
+        return $this->json(['values' => $getConfig ? ['general' => $getConfig->getObjectVars()] : null], 200);
     }
 
     /**
@@ -45,8 +50,22 @@ class ConfigurationController extends AbstractController
         $decode = json_decode($request->get('data'), true);
         $data = $this->exploder($decode);
 
-        $setConfig = Config::setConfig($data);
-        return $this->json($setConfig, 200);
+        $config = Config::getById(1);
+        $success = true;
+        $message = null;
+
+        try {
+            $setConfig = $config ? $config->setValues($data['general']) : false;
+
+            if ($setConfig) {
+                $message = 'Saved successfully';
+                $config->save();
+            }
+        } catch (\Exception $exception) {
+            $success = false;
+            $message = $exception->getMessage();
+        }
+        return $this->json(['success' => $success, 'message' => $message], 200);
     }
 
     public function exploder(array $data)
@@ -62,5 +81,22 @@ class ConfigurationController extends AbstractController
         }
 
         return $tmp;
+    }
+
+    private function getDefaultConfiguration()
+    {
+        $config = new Config();
+        $config->setName('general');
+        $config->setHostorip('127.0.0.1');
+        $config->setPort('9200');
+        $config->setHttpBasicAuthUser('admin');
+        $config->setHttpBasicAuthPassword('admin');
+        $config->setIndex('elastic');
+        try {
+            $config->save();
+            return $config;
+        } catch (\Exception $exception) {
+            return null;
+        }
     }
 }
