@@ -133,7 +133,7 @@ class DataObjectEventListener
         // @todo send to elasticsearch.
         try {
             $putIndex = $this->elasticSearch
-                ->createDocument('nutri', strtolower($className), $object->getId(), $existingFields);
+                ->createDocument(strtolower($className), strtolower($className), $object->getId(), $existingFields);
         } catch (\Exception $exception) {
             $putIndex = ['status' => false, 'message' => $exception->getMessage()];
         }
