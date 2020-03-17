@@ -25,6 +25,12 @@ pimcore.plugin.ElasticSearchBundle = Class.create(pimcore.plugin.admin, {
         });
 
         elasticsearchMenu.push({
+            text: t('menuStopWordsTokenFilter'),
+            iconCls: "pimcore_nav_icon_log_admin",
+            handler: this.elasticsearchMenuStopWordsTokenFilterHandler
+        });
+
+        elasticsearchMenu.push({
             text: t('elasticsearchIndex'),
             iconCls: "pimcore_nav_icon_class",
             handler: this.elasticsearchMenuIndexHandler
@@ -62,6 +68,15 @@ pimcore.plugin.ElasticSearchBundle = Class.create(pimcore.plugin.admin, {
         }
         catch (e) {
             pimcore.globalmanager.add("synonym", new saltid.elasticsearch.setting.synonym());
+        }
+    },
+
+    elasticsearchMenuStopWordsTokenFilterHandler: function () {
+        try {
+            pimcore.globalmanager.get("stopwords").activate();
+        }
+        catch (e) {
+            pimcore.globalmanager.add("stopwords", new saltid.elasticsearch.setting.stopwords());
         }
     },
 

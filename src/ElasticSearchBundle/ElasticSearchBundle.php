@@ -27,6 +27,7 @@ class ElasticSearchBundle extends AbstractPimcoreBundle
             '/bundles/elasticsearch/js/pimcore/elasticsearch/indexItem.js',
             '/bundles/elasticsearch/js/pimcore/elasticsearch/configuration.js',
             '/bundles/elasticsearch/js/pimcore/elasticsearch/synonym.js',
+            '/bundles/elasticsearch/js/pimcore/elasticsearch/stopwords.js',
             '/bundles/elasticsearch/js/pimcore/startup.js'
         ];
     }

@@ -2,8 +2,10 @@ elasticsearch: 'Elasticsearch'
 
 menuConfig: 'Configuration'
 menuSynonymTokenFilter: 'Synonym Token Filter'
+menuStopWordsTokenFilter: 'StopWords Token Filter'
 
 synonym: 'Synonym'
+stopwords: 'StopWords'
 elasticsearchIndex: 'Index'
 hostorip: 'Host or IP'
 port: 'Port'
