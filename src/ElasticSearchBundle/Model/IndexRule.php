@@ -30,6 +30,15 @@ class IndexRule extends AbstractModel
     /** @var boolean $onDataObjectPostUpdate */
     public $onDataObjectPostUpdate;
 
+    /** @var boolean $onDataObjectPreDelete */
+    public $onDataObjectPreDelete;
+
+    /** @var boolean $onDataObjectPostDelete */
+    public $onDataObjectPostDelete;
+
+    /** @var boolean $onDataObjectPostDeleteFailure */
+    public $onDataObjectPostDeleteFailure;
+
     /** @var string $className */
     public $className;
 
@@ -146,6 +155,54 @@ class IndexRule extends AbstractModel
     public function setOnDataObjectPostUpdate($onDataObjectPostUpdate): void
     {
         $this->onDataObjectPostUpdate = $onDataObjectPostUpdate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getOnDataObjectPreDelete(): bool
+    {
+        return $this->onDataObjectPreDelete;
+    }
+
+    /**
+     * @param bool $onDataObjectPreDelete
+     */
+    public function setOnDataObjectPreDelete(bool $onDataObjectPreDelete): void
+    {
+        $this->onDataObjectPreDelete = $onDataObjectPreDelete;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getOnDataObjectPostDelete(): bool
+    {
+        return $this->onDataObjectPostDelete;
+    }
+
+    /**
+     * @param bool $onDataObjectPostDelete
+     */
+    public function setOnDataObjectPostDelete(bool $onDataObjectPostDelete): void
+    {
+        $this->onDataObjectPostDelete = $onDataObjectPostDelete;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getOnDataObjectPostDeleteFailure(): bool
+    {
+        return $this->onDataObjectPostDeleteFailure;
+    }
+
+    /**
+     * @param bool $onDataObjectPostDeleteFailure
+     */
+    public function setOnDataObjectPostDeleteFailure(bool $onDataObjectPostDeleteFailure): void
+    {
+        $this->onDataObjectPostDeleteFailure = $onDataObjectPostDeleteFailure;
     }
 
     /**

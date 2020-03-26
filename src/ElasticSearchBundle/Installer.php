@@ -77,6 +77,21 @@ class Installer extends MigrationInstaller
             'notnull' => false
         ]);
 
+        $table->addColumn('onDataObjectPreDelete', 'smallint', [
+            'default' => 0,
+            'notnull' => false
+        ]);
+
+        $table->addColumn('onDataObjectPostDelete', 'smallint', [
+            'default' => 0,
+            'notnull' => false
+        ]);
+
+        $table->addColumn('onDataObjectPostDeleteFailure', 'smallint', [
+            'default' => 0,
+            'notnull' => false
+        ]);
+
         $table->addColumn('className', 'string', [
             'notnull' => false
         ]);

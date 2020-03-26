@@ -74,6 +74,21 @@ class ElasticSearch
         }
     }
 
+    public function deleteByQuery(string $index, string $type, array $bodyData)
+    {
+        $params = [
+            'index' => $index,
+            'type' => $type,
+            'body' => $bodyData
+        ];
+
+        try {
+            return $this->client->deleteByQuery($params);
+        } catch (\Exception $exception) {
+            return $this->getLastRequestInfo();
+        }
+    }
+
     public function deleteDocument(string $index, string $id)
     {
         $params = [

@@ -60,6 +60,20 @@ saltid.elasticsearch.setting.index.item = Class.create({
                             name: "onDataObjectPostUpdate",
                             labelWidth: 300,
                             value: this.data.onDataObjectPostUpdate,
+                        },
+                        {
+                            xtype: "checkbox",
+                            fieldLabel: "onDataObjectPostDelete",
+                            name: "onDataObjectPostDelete",
+                            labelWidth: 300,
+                            value: this.data.onDataObjectPostDelete,
+                        },
+                        {
+                            xtype: "checkbox",
+                            fieldLabel: "onDataObjectPostDeleteFailure",
+                            name: "onDataObjectPostDeleteFailure",
+                            labelWidth: 300,
+                            value: this.data.onDataObjectPostDeleteFailure,
                         }
                     ]
                 },

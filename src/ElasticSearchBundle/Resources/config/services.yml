@@ -37,3 +37,6 @@ services:
             - { name: kernel.event_listener, event: pimcore.dataobject.postAdd, method: onDataObjectPostAdd }
             - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: onDataObjectPreUpdate }
             - { name: kernel.event_listener, event: pimcore.dataobject.postUpdate, method: onDataObjectPostUpdate }
+            - { name: kernel.event_listener, event: pimcore.dataobject.preDelete, method: onDataObjectPreDelete }
+            - { name: kernel.event_listener, event: pimcore.dataobject.postDelete, method: onDataObjectPostDelete }
+            - { name: kernel.event_listener, event: pimcore.dataobject.postDeleteFailure, method: onDataObjectPostDeleteFailure }
