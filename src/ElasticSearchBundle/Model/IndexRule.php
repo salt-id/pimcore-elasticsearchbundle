@@ -160,7 +160,7 @@ class IndexRule extends AbstractModel
     /**
      * @return bool
      */
-    public function getOnDataObjectPreDelete(): bool
+    public function getOnDataObjectPreDelete()
     {
         return $this->onDataObjectPreDelete;
     }
@@ -168,7 +168,7 @@ class IndexRule extends AbstractModel
     /**
      * @param bool $onDataObjectPreDelete
      */
-    public function setOnDataObjectPreDelete(bool $onDataObjectPreDelete): void
+    public function setOnDataObjectPreDelete($onDataObjectPreDelete): void
     {
         $this->onDataObjectPreDelete = $onDataObjectPreDelete;
     }
@@ -176,7 +176,7 @@ class IndexRule extends AbstractModel
     /**
      * @return bool
      */
-    public function getOnDataObjectPostDelete(): bool
+    public function getOnDataObjectPostDelete()
     {
         return $this->onDataObjectPostDelete;
     }
@@ -184,7 +184,7 @@ class IndexRule extends AbstractModel
     /**
      * @param bool $onDataObjectPostDelete
      */
-    public function setOnDataObjectPostDelete(bool $onDataObjectPostDelete): void
+    public function setOnDataObjectPostDelete($onDataObjectPostDelete): void
     {
         $this->onDataObjectPostDelete = $onDataObjectPostDelete;
     }
@@ -192,7 +192,7 @@ class IndexRule extends AbstractModel
     /**
      * @return bool
      */
-    public function getOnDataObjectPostDeleteFailure(): bool
+    public function getOnDataObjectPostDeleteFailure()
     {
         return $this->onDataObjectPostDeleteFailure;
     }
@@ -200,7 +200,7 @@ class IndexRule extends AbstractModel
     /**
      * @param bool $onDataObjectPostDeleteFailure
      */
-    public function setOnDataObjectPostDeleteFailure(bool $onDataObjectPostDeleteFailure): void
+    public function setOnDataObjectPostDeleteFailure($onDataObjectPostDeleteFailure): void
     {
         $this->onDataObjectPostDeleteFailure = $onDataObjectPostDeleteFailure;
     }
